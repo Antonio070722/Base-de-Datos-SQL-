@@ -1,0 +1,21 @@
+CREATE DATABASE EMPRESA;
+USE EMPRESA;
+
+CREATE TABLE DEPARTAMENTO(
+    codDpto decimal(4,0) PRIMARY KEY, 
+    nombreDpto varchar(20) not null,
+    ciudad varchar(30),
+    director varchar(30)
+);
+
+CREATE TABLE EMPLEADO(
+    codEmp decimal(8,0) PRIMARY KEY,
+    nomEmp varchar(20) not null,
+    sexEmpl varchar(1),
+    fecNac date,
+    fecIncorporacion date,
+    salEmp int,
+    comis int,
+    cargo varchar(20),
+    NroDpto varchar(4,0),
+);
