@@ -11,11 +11,17 @@ CREATE TABLE DEPARTAMENTO(
 CREATE TABLE EMPLEADO(
     codEmp decimal(8,0) PRIMARY KEY,
     nomEmp varchar(20) not null,
-    sexEmpl varchar(1),
+    sexEmpl varchar(1) CHECK (sexEmpl IN ('M','F')),
     fecNac date,
     fecIncorporacion date,
-    salEmp int,
-    comis int,
-    cargo varchar(20),
+    salEmp int CHECK (salEmp>0),
+    comis float,
+    cargo varchar(30),
     NroDpto varchar(4,0),
+    FOREIGN KEY (NroDpto) REFERENCES DEPARTAMENTO(codDpto);
 );
+
+show tables;
+describe EMPLEADO;
+
+INSERT INTO DEPARTAMENTO (codDpto, nombreDpto, ciudad, director)
