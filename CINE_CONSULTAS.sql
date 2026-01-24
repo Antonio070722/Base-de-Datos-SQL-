@@ -1,0 +1,11 @@
+CREATE DATABASE CINE;
+USE CINE;   
+--A
+SELECT Nombre FROM PELICULA;
+--B
+SELECT CalificacionEdad FROM PELICULA;
+--C
+SELECT * from sala where PELICULA is null;
+--D
+SELECT * FROM sala s, PELICULA p WHERE s.PELICULA is not null and s.PELICULA = p.CODIGO;
+
