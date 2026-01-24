@@ -11,7 +11,7 @@ CREATE TABLE LUGARES(
     IdLugar INT PRIMARY KEY,
     site VARCHAR(50),
     cp VARCHAR(10),
-    ciudad VARCHAR(30),
+    ciudad VARCHAR(30)
 );
 
 CREATE TABLE BUSES(
