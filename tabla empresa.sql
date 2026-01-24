@@ -19,7 +19,7 @@ CREATE TABLE EMPLEADO(
     comis float,
     cargo varchar(30),
     NroDpto decimal(4,0),
-    FOREIGN KEY (NroDpto) REFERENCES DEPARTAMENTO(codDpto);
+    FOREIGN KEY (NroDpto) REFERENCES DEPARTAMENTO(codDpto)
 );
 
 show tables;

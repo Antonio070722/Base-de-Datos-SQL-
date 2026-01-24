@@ -1,0 +1,26 @@
+CREATE DATABASE DEPARTAMENTO
+USE DEPARTAMENTO
+
+CREATE TABLE EMPLEADO(
+    codigo_c varchar(20) PRIMARY KEY,
+    nombre varchar (30),
+    edad tinyint,
+    oficio varchar (30),
+    dir varchar(20),
+    fecha_alt date,
+    salario decimal (5,0),
+    comision decimal (4,0),
+    depto_no int
+);
+
+CREATE TABLE DEPARTAMENTO(
+    depto_no int PRIMARY KEY,
+    nombre_depto varchar(30),
+    localizacion varchar(30)
+);
+
+INSERT INTO EMPLEADO (codigo_c, nombre, edad, oficio, dir, fecha_alt, salario, comision, depto_no)
+VALUES
+    (121-212-212L, 'rocha Vargas Hector', 27, 'Vendedor', 'Leon', '1983-05-12', 1200, 0, 40);
+
+UPDATE EMPLEADO SET salario = salario * 2 WHERE depto_no = 30;
