@@ -7,12 +7,24 @@ nombre VARCHAR(30),
 apellidos VARCHAR(30)
 );
 
+SELECT * FROM CONDUCTORES;
+
 CREATE TABLE LUGARES(
     IdLugar INT PRIMARY KEY,
     site VARCHAR(50),
     cp VARCHAR(10),
     ciudad VARCHAR(30)
 );
+SELECT * FROM LUGARES;
+
+SELECT IdLugar, cp, ciudad, site
+FROM LUGARES;
+
+--ALTER TABLE para renombrar las columnas mal nombradas
+ALTER TABLE LUGARES CHANGE site site_temp VARCHAR(50);
+ALTER TABLE LUGARES CHANGE cp ciudad VARCHAR(10);
+ALTER TABLE LUGARES CHANGE ciudad site VARCHAR(30);
+ALTER TABLE LUGARES CHANGE site_temp cp VARCHAR(50);
 
 CREATE TABLE BUSES(
     Registro INT PRIMARY KEY,
