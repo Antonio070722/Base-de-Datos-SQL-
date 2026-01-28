@@ -35,6 +35,33 @@ INSERT INTO producto VALUES(9, 'Portátil Ideapd 320', 444, 2);
 INSERT INTO producto VALUES(10, 'Impresora HP Deskjet 3720', 59.99, 3);
 INSERT INTO producto VALUES(11, 'Impresora HP Laserjet Pro M26nw', 180, 3);
 
---1
-
---2
+--1. Devuelve una lista con el nombre del producto, precio y nombre de fabricante de todos los productos de la base de datos.
+SELECT p.nombre, p.precio, f.nombre
+FROM PRODUCTO P, FABRICANTE F
+WHERE p.codigo_fabricante = f.codigo;
+--2. Devuelve una lista con el nombre del producto, precio y nombre de fabricante de todos los productos de
+--la base de datos. Ordene el resultado por el nombre del fabricante, por orden alfabético.
+SELECT p.nombre, p.precio, f.nombre
+FROM PRODUCTO P, FABRICANTE F
+WHERE p.codigo_fabricante = f.codigo
+ORDER BY f.nombre;
+--3. Devuelve una lista con el código del producto, nombre del producto, código del fabricante y nombre del
+--fabricante, de todos los productos de la base de datos.
+SELECT p.codigo, p.nombre, f.codigo, f.nombre
+FROM PRODUCTO p, FABRICANTE f
+WHERE p.codigo_fabricante = f.codigo;
+--4. Devuelve el nombre del producto, su precio y el nombre de su fabricante, del producto más barato.
+SELECT p.nombre, p.precio, f.nombre
+FROM PRODUCTO p, FABRICANTE f
+WHERE 
+--5. Devuelve el nombre del producto, su precio y el nombre de su fabricante, del producto más caro.
+SELECT p.nombre, p.precio, f.nombre
+FROM PRODUCTO p, FABRICANTE f
+WHERE p.codigo_fabricante = f.codigo AND p.precio = (SELECT MAX(precio) FROM PRODUCTO);
+--6. Devuelve una lista de todos los productos del fabricante Lenovo.
+SELECT p.nombre, p.precio, f.nombre
+FROM PRODUCTO p, FABRICANTE f
+WHERE p.codigo_fabricante = f.codigo AND f.nombre = 'Lenovo';
+--7. Devuelve una lista de todos los productos del fabricante Crucial que tengan un precio mayor que 200€.
+--8. Devuelve un listado con todos los productos de los fabricantes Asus, Hewlett-Packardy Seagate. Sin
+--utilizar el operador IN.
