@@ -60,8 +60,15 @@ FROM PRODUCTO p, FABRICANTE f
 WHERE p.codigo_fabricante = f.codigo AND p.precio = (SELECT MAX(precio) FROM PRODUCTO);
 --6. Devuelve una lista de todos los productos del fabricante Lenovo.
 SELECT p.nombre, p.precio, f.nombre
-FROM PRODUCTO p, FABRICANTE f
+FROM producto p, fabricante f
 WHERE p.codigo_fabricante = f.codigo AND f.nombre = 'Lenovo';
 --7. Devuelve una lista de todos los productos del fabricante Crucial que tengan un precio mayor que 200€.
+SELECT p.*
+FROM producto p
+INNER JOIN fabricante f
+ON p.codigo_fabricante = f.codigo
+WHERE f.nombre = 'Asus'
+OR f.nombre = 'Hewlett-Packard'
+OR f.nombre = 'Seagate';
 --8. Devuelve un listado con todos los productos de los fabricantes Asus, Hewlett-Packardy Seagate. Sin
 --utilizar el operador IN.
