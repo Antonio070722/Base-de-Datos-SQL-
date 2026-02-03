@@ -92,8 +92,7 @@ left join producto p
 on f.codigo = p.codigo_fabricante
 where p.codigo is null;
 
-
-
+--1.1.4
 --9. Calcula la suma de los precios de todos los productos.
 SELECT SUM(precio) as suma_precios FROM producto;
 
