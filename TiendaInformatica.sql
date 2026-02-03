@@ -92,3 +92,16 @@ left join producto p
 on f.codigo = p.codigo_fabricante
 where p.codigo is null;
 
+
+
+--9. Calcula la suma de los precios de todos los productos.
+SELECT SUM(precio) as suma_precios FROM producto;
+
+--10. Calcula el número de productos que tiene el fabricante Asus.
+
+--11. Calcula la media del precio de todos los productos del fabricante Asus.
+
+--12. Calcula el precio más barato de todos los productos del fabricante Asus.
+
+--13. Calcula el precio más caro de todos los productos del fabricante Asus.
+
