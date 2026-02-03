@@ -72,3 +72,23 @@ OR f.nombre = 'Hewlett-Packard'
 OR f.nombre = 'Seagate';
 --8. Devuelve un listado con todos los productos de los fabricantes Asus, Hewlett-Packardy Seagate. Sin
 --utilizar el operador IN.
+
+
+
+
+--1.1.3
+--Devuelve un listado de todos los fabricantes que existen en la base de datos, junto con los productos que
+----tiene cada uno de ellos. El listado deberá mostrar también aquellos fabricantes que no tienen productos
+--asociados.
+SELECT f.codigo, f.nombre as fabricante,
+p.codigo, p.nombre as producto, p.precio
+from fabricante f
+left join producto p
+on f.codigo = p.codigo_fabricante;
+
+--2. Devuelve un listado donde sólo aparezcan aquellos fabricantes que no tienen ningún producto asociado.
+SELECT f.codigo, f.nombre from fabricante f 
+left join producto p
+on f.codigo = p.codigo_fabricante
+where p.codigo is null;
+
