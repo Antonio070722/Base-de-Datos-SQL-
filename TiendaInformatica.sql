@@ -189,3 +189,12 @@ order by nombre DESC;
 SELECT nombre
 FROM producto
 order by nombre ASC, precio DESC;
+--16. Devuelve una lista con las 5 primeras filas de la tabla fabricante.
+SELECT * 
+FROM fabricante
+LIMIT 5;
+--17. Devuelve una lista con 2 filas a partir de la cuarta fila de la tabla fabricante. La cuarta fila también se
+--debe incluir en la respuesta
+SELECT * 
+from fabricante
+LIMIT 2, 3 --El primer número son las filas a mostrar y el segundo numero para saltarte los tres primeros registros y emprezar en el cuarto
