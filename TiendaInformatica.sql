@@ -96,11 +96,96 @@ where p.codigo is null;
 --9. Calcula la suma de los precios de todos los productos.
 SELECT SUM(precio) as suma_precios FROM producto;
 
---10. Calcula el número de productos que tiene el fabricante Asus.
+--10 Calcula el número de productos que tiene el fabricante ASUS.
+SELECT COUNT(*) as numero_productos_asus
+FROM producto p
+INNER JOIN fabricante f ON p.codigo_fabricante = f.codigo
+WHERE f.nombre = 'Asus';
 
---11. Calcula la media del precio de todos los productos del fabricante Asus.
+--11. Calcula la media del precio de todos los productos 
+SELECT AVG(p.PRECIO) FROM PRODUCTO p
+JOIN fabricante f on p.cod_fab = f.codigo_f
+where f.nombre = 'Asus';
 
---12. Calcula el precio más barato de todos los productos del fabricante Asus.
 
---13. Calcula el precio más caro de todos los productos del fabricante Asus.
+--12. Calcula el precio más barato de todos los productos 
+SELECT MIN(PRECIO) FROM PRODUCTO
 
+--13. Calcula el precio más caro de todos los productos 
+SELECT MAX(p.PRECIO) FROM PRODUCTO p
+JOIN fabricante f on p.cod_fab = f.codigo_f
+where f.nombre = 'Asus';
+
+--14. Calcula la suma de todos los productos del fabricante Asus.
+
+
+--15. Muestra el precio máximo, precio mínimo, precio medio y el número total de productos que tiene el fabricante Crucial.
+SELECT 
+    MAX(p.precio) as precio_maximo,
+    MIN(p.precio) as precio_minimo,
+    AVG(p.precio) as precio_medio,
+    COUNT(*) as total_productos
+FROM producto p
+INNER JOIN fabricante f ON p.codigo_fabricante = f.codigo
+WHERE f.nombre = 'Crucial';
+
+--16. Muestra el número total de productos que tiene cada uno de los fabricantes. El listado también debe
+--incluir los fabricantes que no tienen ningún producto. El resultado mostrará dos columnas, una con el
+--nombre del fabricante y otra con el número de productos que tiene. Ordene el resultado descendentemente por el número de productos.
+
+
+--1.1.3 Ejercicios consultas SQL UD 4 (pt 1) repaso examen
+--1. Lista el nombre de todos los productos que hay en la tabla producto.
+SELECT nombre FROM producto;
+--2. Lista los nombres y los precios de todos los productos de la tabla producto.
+SELECT nombre, precio FROM producto;
+--3. Lista todas las columnas de la tabla producto.
+SELECT * FROM producto;
+--4. Lista el nombre de los productos, el precio en euros y el precio en dólares estadounidenses (USD).
+SELECT nombre, precio, 
+precio * 1.10 as 'precio USD' 
+FROM producto
+--5. Lista el nombre de los productos, el precio en euros y el precio en dólares estadounidenses (USD). Utiliza
+--los siguientes alias para las columnas: nombre de producto, euros, dólares.
+SELECT nombre as 'nombre de producto',
+euros as 'euros';
+dolares * 1.10 as 'dólares'
+--6. Lista los nombres y los precios de todos los productos de la tabla producto, convirtiendo los nombres a 
+--mayúscula
+SELECT upper(nombre), precio
+FROM producto
+--7. Lista los nombres y los precios de todos los productos de la tabla producto, convirtiendo los nombres a 
+--minúscula
+SELECT lower(nombre), precio
+FROM producto
+--8. Lista el nombre de todos los fabricantes en una columna, y en otra columna obtenga en mayúsculas los 
+--dos primeros caracteres del nombre del fabricante.
+SELECT nombre upper(left(nombre, 2)) as iniciales
+from fabricante
+--9. Lista los nombres y los precios de todos los productos de la tabla producto, redondeando el valor del 
+--precio
+
+--10. Lista los nombres y los precios de todos los productos de la tabla producto, truncando el valor del precio
+--para mostrarlo sin ninguna cifra decimal.
+SELECT nombre, TRUNCATE(precio, 0)
+FROM producto
+--11. Lista el código de los fabricantes que tienen productos en la tabla producto.
+SELECT codigo_fabricante
+FROM producto
+--12. Lista el código de los fabricantes que tienen productos en la tabla producto, eliminando los códigos que
+--aparecen repetidos.
+SELECT DISTINCT codigo_fabricante
+FROM producto
+--13. Lista los nombres de los fabricantes ordenados de forma ascendente.
+SELECT nombre
+from fabricante
+order by nombre ASC;
+--14. Lista los nombres de los fabricantes ordenados de forma descendente.
+SELECT nombre
+FROM fabricante
+order by nombre DESC;
+--15. Lista los nombres de los productos ordenados en primer lugar por el nombre de forma ascendente y en
+--segundo lugar por el precio de forma descendente
+SELECT nombre
+FROM producto
+order by nombre ASC, precio DESC;
