@@ -286,6 +286,8 @@ order by precio DESC, nombre ASC;
 
 -- 1.1.5.2 Subconsultas con ALL y ANY
 -- 8. Devuelve el producto más caro que existe en la tabla producto sin hacer uso de MAX, ORDER BY ni LIMIT.
+SELECT * FROM producto
+WHERE precio >= ALL(SELECT precio from producto);
 
 -- 9. Devuelve el producto más barato que existe en la tabla producto sin hacer uso de MIN, ORDER BY ni
 -- LIMIT.
@@ -293,3 +295,15 @@ order by precio DESC, nombre ASC;
 -- 10. Devuelve los nombres de los fabricantes que tienen productos asociados. (Utilizando ALL o ANY).
 
 -- 11. Devuelve los nombres de los fabricantes que no tienen productos asociados. (Utilizando ALL o ANY).
+
+-- 14 Devuelve los nombres de los fabricantes que tienen productos asociados. (EXISTS).
+-- 15. Devuelve los nombres de los fabricantes que no tienen productos asociados. (NOT EXISTS)
+SELECT nombre
+FROM fabricante f
+where not exists(
+    select *
+    from producto p
+    where p.codigo_fabricante = f.codigo
+)
+
+-- 16 
