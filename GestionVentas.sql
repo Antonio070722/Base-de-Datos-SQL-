@@ -108,3 +108,63 @@ WHERE cliente.id = pedido.id_cliente
   AND comercial.nombre = 'Daniel'
   AND comercial.apellido1 = 'Sáez'
   AND comercial.apellido2 = 'Vega';
+
+-- 1.3.3 Consultas multitabla (Composición externa)
+--Resuelva todas las consultas utilizando las cláusulas LEFT JOIN y RIGHT JOIN.
+--1. Devuelve un listado con todos los clientes junto con los datos de los pedidos que han realizado. Este listado también debe incluir los clientes que no han realizado ningún pedido. El listado debe estar ordenado
+--alfabéticamente por el primer apellido, segundo apellido y nombre de los clientes.
+SELECT * FROM cliente c
+LEFT JOIN pedido p
+    ON c.id = p.id_cliente
+ORDER BY c.apellido1, c.apellido2, c.nombre;
+
+-- 2. Devuelve un listado con todos los comerciales junto con los datos de los pedidos que han realizado. Este
+--listado también debe incluir los comerciales que no han realizado ningún pedido. El listado debe estar
+--ordenado alfabéticamente por el primer apellido, segundo apellido y nombre de los comerciales.
+SELECT *
+FROM comercial
+LEFT JOIN pedido 
+    ON comercial.id = pedido.id_comercial
+ORDER BY comercial.apellido1, comercial.apellido2, comercial.nombre;
+
+
+-- 1.3.4 
+-- 1. Calcula la cantidad total que suman todos los pedidos que aparecen en la tabla pedido.
+SELECT SUM(cantidad) AS total_pedidos 
+FROM pedido;
+-- 2. Calcula la cantidad media de todos los pedidos que aparecen en la tabla pedido.
+SELECT AVG(cantidad) AS media_pedidos 
+FROM pedido;
+-- 3. Calcula el número total de comerciales distintos que aparecen en la tabla pedido.
+SELECT COUNT(DISTINCT id_comercial) 
+as comerciales
+from pedido;
+-- 4. Calcula el número total de clientes que aparecen en la tabla cliente.
+SELECT COUNT(*) 
+AS total_clientes 
+FROM cliente;
+-- 5. Calcula cuál es la mayor cantidad que aparece en la tabla pedido.
+SELECT MAX(cantidad)
+as maximo
+from pedido;
+-- 6. Calcula cuál es la menor cantidad que aparece en la tabla pedido
+SELECT MIN(cantidad)
+as minimo
+from pedido;
+-- 7. Calcula cuál es el valor máximo de categoría para cada una de las ciudades que aparece en la tabla
+-- cliente.
+SELECT ciudad, MAX(categoría) as categoria_maxima
+from cliente
+group by ciudad;
+-- 9
+SELECT id_cliente, fecha, MAX(total) as max_cantidad
+from cliente
+GROUP BY id_cliente_ fecha
+HAVING MAX(cantidad) > 2000;
+
+--10
+select max(total), id, nombre, apellidos
+from comercial join pedido on comercial.id = pedido.id_comercial
+where pedido fecha = '2016-08-17'
+group by comercial.id, fecha;
+
