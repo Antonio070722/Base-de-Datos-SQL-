@@ -180,3 +180,42 @@ SELECT c.id, c.nombre, c.apellido1, c.apellido2, COUNT(p.id) AS total_pedidos_20
 FROM cliente c
 LEFT JOIN pedido p ON c.id = p.id_cliente AND YEAR(p.fecha) = 2017
 GROUP BY c.id, c.nombre, c.apellido1, c.apellido2;
+-- 1.3.5.1
+-- 1
+SELECT pedido.*
+FROM cliente, pedido
+WHERE cliente.id = pedido.id_cliente
+  AND cliente.nombre = 'Adela'
+  AND cliente.apellido1 = 'Salas'
+  AND cliente.apellido2 = 'Díaz';
+--2
+SELECT COUNT(*) as num_pedidos
+from comercial, pedido
+where comercial.id = pedido.id_comercial
+and comercial.nombre='Daniel';
+and comercial.apellido1='Sáez';
+and comercial.apellido2='Vega';
+--3
+SELECT * 
+from cliente c, pedido p
+where c.id = p.id_cliente
+and p.cantidad = (
+    select max(cantidad)
+    from pedido
+);
+
+-- 4
+SELECT pedido.fecha, pedido.cantidad
+FROM cliente, pedido
+WHERE cliente.id = pedido.id_cliente
+  AND cliente.nombre = 'Pepe'
+  AND cliente.apellido1 = 'Ruiz'
+  AND cliente.apellido2 = 'Santana'
+  AND pedido.cantidad = (
+      SELECT MIN(p.cantidad)
+      FROM pedido p, cliente c
+      WHERE p.id_cliente = c.id
+        AND c.nombre = 'Pepe'
+        AND c.apellido1 = 'Ruiz'
+        AND c.apellido2 = 'Santana'
+  );
