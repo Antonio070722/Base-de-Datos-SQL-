@@ -164,7 +164,8 @@ SELECT nombre upper(left(nombre, 2)) as iniciales
 from fabricante
 --9. Lista los nombres y los precios de todos los productos de la tabla producto, redondeando el valor del 
 --precio
-
+SELECT nombre, precio as 'precio sin redondear', round(precio, 0) as 'precio redondeado'
+from producto;
 --10. Lista los nombres y los precios de todos los productos de la tabla producto, truncando el valor del precio
 --para mostrarlo sin ninguna cifra decimal.
 SELECT nombre, TRUNCATE(precio, 0)

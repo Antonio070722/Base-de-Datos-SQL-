@@ -99,6 +99,15 @@ WHERE comercial.id = pedido.id_comercial
   AND cliente.apellido1 = 'Santana'
   AND cliente.apellido2 = 'Moreno';
 
+  SELECT DISTINCT comercial.nombre, comercial.apellido1, comercial.apellido2
+  from comercial
+  join pedido on comercial.id = pedido.id_comercial
+  join cliente on pedido.id = cliente.id
+  where comercial.id = pedido.id_comercial
+  and cliente.nombre = 'María'
+  and cliente.apellido1 = 'Santana'
+  and cliente.apellido2 =  'Moreno';
+
 -- 7. Devuelve el nombre de todos los clientes que han realizado algún pedido con el comercial Daniel Sáez
 --    Vega.
 SELECT DISTINCT cliente.nombre, cliente.apellido1, cliente.apellido2
@@ -108,6 +117,14 @@ WHERE cliente.id = pedido.id_cliente
   AND comercial.nombre = 'Daniel'
   AND comercial.apellido1 = 'Sáez'
   AND comercial.apellido2 = 'Vega';
+  
+  select distinct c.nombre, c.apellido1, c.apellido2
+  from cliente c
+  join pedido p on c.id = p.id_cliente
+  join comercial co on p.id_comercial = co.id
+  where co.nombre = 'Daniel'
+  and co.apellido1 = 'Sáez'
+  and co.apellido2 = 'Vega';
 
 -- 1.3.3 Consultas multitabla (Composición externa)
 --Resuelva todas las consultas utilizando las cláusulas LEFT JOIN y RIGHT JOIN.
@@ -118,9 +135,18 @@ LEFT JOIN pedido p
     ON c.id = p.id_cliente
 ORDER BY c.apellido1, c.apellido2, c.nombre;
 
+SELECT * FROM cliente c
+left join pedido p 
+	on c.id = p.id_cliente;
+
 -- 2. Devuelve un listado con todos los comerciales junto con los datos de los pedidos que han realizado. Este
---listado también debe incluir los comerciales que no han realizado ningún pedido. El listado debe estar
---ordenado alfabéticamente por el primer apellido, segundo apellido y nombre de los comerciales.
+-- listado también debe incluir los comerciales que no han realizado ningún pedido. El listado debe estar
+-- ordenado alfabéticamente por el primer apellido, segundo apellido y nombre de los comerciales.
+SELECT * 
+FROM comercial co
+left join pedido p 
+on co.id = p.id_comercial;
+
 SELECT *
 FROM comercial
 LEFT JOIN pedido 
@@ -153,6 +179,10 @@ as minimo
 from pedido;
 -- 7. Calcula cuál es el valor máximo de categoría para cada una de las ciudades que aparece en la tabla
 -- cliente.
+select ciudad, max(categoría) as categoria_max
+from cliente
+group by ciudad;
+
 SELECT ciudad, MAX(categoría) as categoria_maxima
 from cliente
 group by ciudad;
@@ -176,6 +206,12 @@ GROUP BY c.id, c.nombre, c.apellido1, c.apellido2;
 
 -- 12. Devuelve un listado con el identificador de cliente, nombre y apellidos y el número total de pedidos que
 -- ha realizado cada uno de clientes durante el año 2017.
+select c.id, c.nombre, c.apellido1, c.apellido2, COUNT(p.id) as total_pedidos_2017
+from cliente c
+left join pedido p on c.id = p.id_cliente
+and year(p.fecha)=2017
+group by c.id, c.nombre, c.apellido1, c.apellido2;
+
 SELECT c.id, c.nombre, c.apellido1, c.apellido2, COUNT(p.id) AS total_pedidos_2017
 FROM cliente c
 LEFT JOIN pedido p ON c.id = p.id_cliente AND YEAR(p.fecha) = 2017
@@ -188,14 +224,14 @@ WHERE cliente.id = pedido.id_cliente
   AND cliente.nombre = 'Adela'
   AND cliente.apellido1 = 'Salas'
   AND cliente.apellido2 = 'Díaz';
---2
+-- 2
 SELECT COUNT(*) as num_pedidos
 from comercial, pedido
 where comercial.id = pedido.id_comercial
-and comercial.nombre='Daniel';
-and comercial.apellido1='Sáez';
+and comercial.nombre='Daniel'
+and comercial.apellido1='Sáez'
 and comercial.apellido2='Vega';
---3
+-- 3
 SELECT * 
 from cliente c, pedido p
 where c.id = p.id_cliente
